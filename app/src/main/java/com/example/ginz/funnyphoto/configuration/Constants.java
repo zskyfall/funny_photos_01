@@ -14,12 +14,12 @@ public final class Constants {
     }
 
     public class Server {
-        public static final String BASE_URL_API = "http://192.168.2.229:3000/";
+        public static final String BASE_URL_API = "http://167.99.74.194:3000/";
         public static final String RESOURCE_USER = BASE_URL_API + "users/";
         public static final String RESOURCE_PHOTO = BASE_URL_API + "photos/";
-        public static final String ACTION_LOGIN = BASE_URL_API + "users/login/";
-        public static final String ACTION_REGISTER = BASE_URL_API + "users/register/";
         public static final String ACTION_UPDATE_PROFILE = BASE_URL_API + "users/update";
+        public static final String ACTION_LOGIN = RESOURCE_USER + "login/";
+        public static final String ACTION_REGISTER = RESOURCE_USER + "register/";
     }
 
     public class Authentication {
@@ -27,6 +27,8 @@ public final class Constants {
         public static final String MESSAGE_ERROR = "error";
         public static final String KEY_MESSAGE = "message";
         public static final String KEY_DESCRIPTION = "description";
+        public static final int ERROR_SERVER = 1;
+        public static final int ERROR_USER = 1;
     }
 
     public class Method {

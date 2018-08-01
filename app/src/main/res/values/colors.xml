@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#000000</color>
-    <color name="color_primary_dark">#9f3034</color>
-    <color name="color_accent">#ffffff</color>
+    <color name="color_primary">#3F51B5</color>
+    <color name="color_primary_dark">#303F9F</color>
+    <color name="color_accent">#FF4081</color>
     <color name="color_light_grey">#4ad9d9d9</color>
     <color name="color_grey">#d9d7d7</color>
     <color name="color_dark">#292929</color>
@@ -11,4 +11,8 @@
     <color name="color_soft_green">#0cbf8b</color>
     <color name="color_purple">#c10de3</color>
     <color name="color_blue">#000482ac</color>
+    <color name="color_caribbean_green">#0cbf8b</color>
+    <color name="color_electric_purple">#c10de3</color>
+    <color name="color_powder_white">#a1e1e1e1</color>
+    <color name="color_gainsboro">#54e1e1e1</color>
 </resources>
