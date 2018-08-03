@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">FunnyPhoto</string>
+    <string name="app_name">HaiVN</string>
+    <string name="cancel">Thoát</string>
+    <string name="create_account">Tạo tài khoản</string>
+    <string name="email">Email</string>
+    <string name="facebook">Facebook</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="fullname">Họ tên</string>
+    <string name="gallery">Thư viện ảnh</string>
+    <string name="home">Home</string>
+    <string name="hot">Hot</string>
+    <string name="login">Login</string>
+    <string name="ok">OK</string>
+    <string name="or">Hoặc</string>
+    <string name="register">Đăng ký</string>
+    <string name="username">Tên đăng nhập</string>
+    <string name="password">Mật khẩu</string>
+    <string name="post">Bài viết</string>
+    <string name="profile">Profile</string>
+    <string name="agree_policy">Đồng ý với điều khoản và chính sách</string>
+    <string name="registration_name_required">Yêu cầu nhập họ tên</string>
+    <string name="registration_email_required">Yêu cầu nhập email</string>
+    <string name="registration_username_required">Yêu cầu nhập tên đăng nhập</string>
+    <string name="registration_password_required">Yêu cầu nhập mật khẩu</string>
+    <string name="registration_check_policy_required">Hãy đồng ý với Điều Khoản và Chính Sách trước!</string>
 </resources>
