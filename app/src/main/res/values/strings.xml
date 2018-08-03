@@ -17,10 +17,16 @@
     <string name="password">Mật khẩu</string>
     <string name="post">Bài viết</string>
     <string name="profile">Profile</string>
+    <string name="update_profile_title">Chỉnh sửa trang cá nhân</string>
+    <string name="update_avatar">Thay đổi ảnh</string>
+    <string name="update_starting">Đang cập nhật, xin chờ chút xíu...!</string>
+    <string name="update_profile_error">Xảy ra lỗi khi cập nhật! Thử lại?</string>
+    <string name="update_profile_success">Cập nhật thành công!</string>
     <string name="agree_policy">Đồng ý với điều khoản và chính sách</string>
     <string name="registration_name_required">Yêu cầu nhập họ tên</string>
     <string name="registration_email_required">Yêu cầu nhập email</string>
     <string name="registration_username_required">Yêu cầu nhập tên đăng nhập</string>
     <string name="registration_password_required">Yêu cầu nhập mật khẩu</string>
     <string name="registration_check_policy_required">Hãy đồng ý với Điều Khoản và Chính Sách trước!</string>
+    <string name="send_request_error">Xảy ra lỗi khi gửi yêu cầu: </string>
 </resources>

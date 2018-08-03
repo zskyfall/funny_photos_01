@@ -8,7 +8,7 @@ public interface RegisterContract {
 
     interface View extends BaseView<Presenter> {
 
-        void onRegisterSuccess();
+        void onRegisterSuccess(User user);
 
         void onRegisterError(String message);
 
