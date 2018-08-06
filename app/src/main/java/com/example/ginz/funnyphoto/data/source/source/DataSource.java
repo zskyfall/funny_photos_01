@@ -2,9 +2,9 @@ package com.example.ginz.funnyphoto.data.source.source;
 
 public interface DataSource {
 
-    interface OnCompleteListener <T>{
+    interface OnCompleteListener {
 
-        void onRequestSuccess(T result);
+        void onRequestSuccess(String result);
 
         void onRequestError(Exception e);
     }

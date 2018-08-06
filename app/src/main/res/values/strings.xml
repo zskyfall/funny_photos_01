@@ -28,5 +28,24 @@
     <string name="registration_username_required">Yêu cầu nhập tên đăng nhập</string>
     <string name="registration_password_required">Yêu cầu nhập mật khẩu</string>
     <string name="registration_check_policy_required">Hãy đồng ý với Điều Khoản và Chính Sách trước!</string>
-    <string name="send_request_error">Xảy ra lỗi khi gửi yêu cầu: </string>
+    <string name="action_cancel">Thoát</string>
+    <string name="action_create_account">Tạo tài khoản</string>
+    <string name="action_forgot_password">Quên mật khẩu</string>
+    <string name="action_login">Login</string>
+    <string name="action_register">Đăng ký</string>
+    <string name="error_user_or_password_incorrect">Sai mật khẩu hoặc tài khoản</string>
+    <string name="error_connect">Lỗi kết nối</string>
+    <string name="title_email">Email</string>
+    <string name="title_facebook">Facebook</string>
+    <string name="title_fullname">Họ tên</string>
+    <string name="title_gallery">Thư viện ảnh</string>
+    <string name="title_home">Home</string>
+    <string name="title_hot">Hot</string>
+    <string name="title_ok">OK</string>
+    <string name="title_or">Hoặc</string>
+    <string name="title_username">Tên đăng nhập</string>
+    <string name="title_password">Mật khẩu</string>
+    <string name="title_post">Bài viết</string>
+    <string name="title_profile">Profile</string>
+>>>>>>> create UI, Handler event login function
 </resources>

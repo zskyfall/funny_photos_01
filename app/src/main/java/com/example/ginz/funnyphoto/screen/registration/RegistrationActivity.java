@@ -39,8 +39,13 @@ public class RegistrationActivity extends AppCompatActivity implements RegisterC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+<<<<<<< HEAD
         mRegisterPresenter = new RegisterPresenter( UsersRepository.getInstance(UsersRemoteDataSource.getInstance()),
                 this);
+=======
+//        mRegisterPresenter = new RegisterPresenter(this, null,
+//                this);
+>>>>>>> create UI, Handler event login function
         initView();
         setListener();
         setFont();
