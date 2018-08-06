@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,9 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.ginz.funnyphoto.R;
 import com.example.ginz.funnyphoto.data.model.User;
+import com.example.ginz.funnyphoto.data.source.source.UsersRepository;
+import com.example.ginz.funnyphoto.data.source.source.remote.UsersRemoteDataSource;
 import com.example.ginz.funnyphoto.screen.main.MainActivity;
 
-public class RegistrationActivity extends AppCompatActivity implements RegisterContract.View, View.OnClickListener{
+public class RegistrationActivity extends AppCompatActivity implements RegisterContract.View,
+        View.OnClickListener{
 
     private static final String FONT_PATH = "fonts/fortee.ttf";
     private Typeface mTypeface;
@@ -35,7 +39,7 @@ public class RegistrationActivity extends AppCompatActivity implements RegisterC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mRegisterPresenter = new RegisterPresenter(this, null,
+        mRegisterPresenter = new RegisterPresenter( UsersRepository.getInstance(UsersRemoteDataSource.getInstance()),
                 this);
         initView();
         setListener();
@@ -63,8 +67,8 @@ public class RegistrationActivity extends AppCompatActivity implements RegisterC
     }
 
     @Override
-    public void onRegisterSuccess() {
-        goMainScreen();
+    public void onRegisterSuccess(User user) {
+        goMainScreen(user);
     }
 
     @Override
@@ -99,7 +103,7 @@ public class RegistrationActivity extends AppCompatActivity implements RegisterC
         mRegisterPresenter.doRegister(user, register);
     }
 
-    private void goMainScreen() {
+    private void goMainScreen(User user) {
         startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
     }
 }

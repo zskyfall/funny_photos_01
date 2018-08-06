@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 
 import com.example.ginz.funnyphoto.configuration.Constants;
+import com.example.ginz.funnyphoto.data.model.User;
+import com.example.ginz.funnyphoto.data.source.source.DataSource;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,19 +19,21 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegistrationAsyncTask extends AsyncTask<String, Void, String> {
+public class GetDataAsyncTask extends AsyncTask<String, Void, String> {
     private static final int DEFAULT_TIMEOUT = 10000;
     private HttpURLConnection mConn;
     private String mApiUrl;
     private Map<String, String> mParameters;
     private int mConnectTimeout;
     private int mReadTimeout;
+    private DataSource.OnCompleteListener mOnCompleteListener;
 
-    private RegistrationAsyncTask(Builder builder){
+    private GetDataAsyncTask(Builder builder){
         mApiUrl = builder.mApiUrl;
         mParameters = builder.mParameters;
         mConnectTimeout = builder.mConnectTimeout;
         mReadTimeout = builder.mReadTimeout;
+        mOnCompleteListener = builder.mOnCompleteListener;
     }
 
     @Override
@@ -46,6 +50,7 @@ public class RegistrationAsyncTask extends AsyncTask<String, Void, String> {
             return resqonse();
         } catch (IOException e) {
             e.printStackTrace();
+            mOnCompleteListener.onRequestError(e);
         }
         return null;
     }
@@ -53,6 +58,7 @@ public class RegistrationAsyncTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        mOnCompleteListener.onRequestSuccess(s);
     }
 
     private String resqonse() throws IOException {
@@ -97,6 +103,7 @@ public class RegistrationAsyncTask extends AsyncTask<String, Void, String> {
         private Map<String, String> mParameters;
         private int mConnectTimeout;
         private int mReadTimeout;
+        private DataSource.OnCompleteListener mOnCompleteListener;
 
         public Builder() {
             mParameters = new HashMap<>();
@@ -124,8 +131,13 @@ public class RegistrationAsyncTask extends AsyncTask<String, Void, String> {
             return this;
         }
 
-        public RegistrationAsyncTask build(){
-            return new RegistrationAsyncTask(this);
+        public GetDataAsyncTask build(){
+            return new GetDataAsyncTask(this);
+        }
+
+        public Builder addOnCompleteListener(DataSource.OnCompleteListener onCompleteListener){
+            mOnCompleteListener = onCompleteListener;
+            return this;
         }
     }
 }

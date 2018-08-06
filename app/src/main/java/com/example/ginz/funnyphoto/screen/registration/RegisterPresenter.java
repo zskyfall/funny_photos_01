@@ -2,6 +2,7 @@ package com.example.ginz.funnyphoto.screen.registration;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.ginz.funnyphoto.R;
 import com.example.ginz.funnyphoto.configuration.Constants;
@@ -15,7 +16,7 @@ import org.json.JSONObject;
 import static com.example.ginz.funnyphoto.utils.Preconditions.checkNotNull;
 
 public class RegisterPresenter implements RegisterContract.Presenter,
-        UserDataSource.Callback {
+        UserDataSource.RegisterUserCallback {
 
     @NonNull
     private UsersRepository mUserRepository;
@@ -37,33 +38,28 @@ public class RegisterPresenter implements RegisterContract.Presenter,
     }
 
     @Override
-    public void onStartLoading() {
+    public void onRegisterUserStart() {
 
     }
 
     @Override
-    public void onLoaded(Object data) {
-
+    public void onRegisterUserSuccess(User user) {
+        mRegisterView.onRegisterSuccess(user);
     }
 
     @Override
-    public void onDataNotAvailable(Exception exception) {
-
-    }
-
-    @Override
-    public void onComplete() {
-
+    public void onRegisterUserError(String message) {
+        mRegisterView.onRegisterError(message);
     }
 
     @Override
     public void doRegister(User user, boolean isChecked) {
         if(validateUser(user, isChecked)) {
-            mUserRepository.saveUser(user);
+            mUserRepository.saveUser(user, this);
         }
     }
 
-    private boolean validateUser(User user, boolean isChecked) {
+    private boolean validateUser(User user, boolean register) {
         if(user.getUsername().isEmpty()) {
             mRegisterView.onRegisterError(mRegisterView.getString(R.string.registration_username_required));
             return false;
@@ -76,11 +72,11 @@ public class RegisterPresenter implements RegisterContract.Presenter,
             mRegisterView.onRegisterError(mRegisterView.getString(R.string.registration_password_required));
             return false;
         }
-        if(user.getUsername().isEmpty()) {
+        if(user.getFullName().isEmpty()) {
             mRegisterView.onRegisterError(mRegisterView.getString(R.string.registration_name_required));
             return  false;
         }
-        if(!isChecked) {
+        if(!register) {
             mRegisterView.onRegisterError(mRegisterView.getString(R.string.registration_check_policy_required));
             return false;
         }
@@ -92,4 +88,5 @@ public class RegisterPresenter implements RegisterContract.Presenter,
         String result = jsonObject.getString(Constants.Authentication.KEY_MESSAGE);
         return result.equals(Constants.Authentication.MESSAGE_OK);
     }
+
 }
