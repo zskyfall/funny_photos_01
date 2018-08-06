@@ -65,7 +65,7 @@ public class UpdateProfilePresenter implements UpdateProfileContract.Presenter,
     }
 
     @Override
-    public void onUpdateUserError(String messsage) {
-        mUpdateProfileView.onUpdateProfileError(messsage);
+    public void onUpdateUserError(Exception messsage) {
+        mUpdateProfileView.onUpdateProfileError(messsage.toString());
     }
 }
