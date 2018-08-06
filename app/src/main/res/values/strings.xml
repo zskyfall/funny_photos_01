@@ -47,5 +47,8 @@
     <string name="title_password">Mật khẩu</string>
     <string name="title_post">Bài viết</string>
     <string name="title_profile">Profile</string>
->>>>>>> create UI, Handler event login function
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    >>>>>>> create UI, Handler event login function
 </resources>
