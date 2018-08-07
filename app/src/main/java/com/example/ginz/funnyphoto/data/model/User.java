@@ -2,9 +2,7 @@ package com.example.ginz.funnyphoto.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.example.ginz.funnyphoto.configuration.Constants;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,6 +19,11 @@ public class User implements Parcelable{
         mFullName = in.readString();
         mAvatar = in.readString();
         mEmail = in.readString();
+    }
+
+    public User(String username, String avatar){
+        mUsername = username;
+        mAvatar = avatar;
     }
 
     public User(String username, String password, String fullName, String avatar, String email) {
@@ -93,16 +96,26 @@ public class User implements Parcelable{
         parcel.writeString(mEmail);
     }
 
+    public static class Key {
+        public static final String USER = "user";
+        public static final String USERNAME = "username";
+        public static final String PASSWORD = "password";
+        public static final String EMAIL = "email";
+        public static final String FULL_NAME = "fullName";
+        public static final String NAME = "name";
+        public static final String AVATAR = "avatar";
+    }
+
     public static User parseUser(String data) throws JSONException {
         JSONObject jsonObject = new JSONObject(data);
         String message = jsonObject.getString(Constants.Authentication.KEY_MESSAGE);
         if(message.equals(Constants.Authentication.MESSAGE_OK)){
-            JSONObject jsonUser = jsonObject.getJSONObject(Constants.Key.USER);
-            String username = jsonUser.optString(Constants.Key.USERNAME, null);
-            String password = jsonUser.optString(Constants.Key.PASSWORD, null);
-            String email = jsonUser.optString(Constants.Key.EMAIL, null);
-            String fullName = jsonUser.optString(Constants.Key.FULL_NAME, null);
-            String avatar = jsonUser.optString(Constants.Key.AVATAR, null);
+            JSONObject jsonUser = jsonObject.getJSONObject(User.Key.USER);
+            String username = jsonUser.optString(User.Key.USERNAME, null);
+            String password = jsonUser.optString(User.Key.PASSWORD, null);
+            String email = jsonUser.optString(User.Key.EMAIL, null);
+            String fullName = jsonUser.optString(User.Key.FULL_NAME, null);
+            String avatar = jsonUser.optString(User.Key.AVATAR, null);
             User user = new User(username, password, fullName, email, avatar);
             return user;
         } else {

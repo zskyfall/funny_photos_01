@@ -6,14 +6,14 @@ import com.example.ginz.funnyphoto.data.model.User;
 
 public interface UsersDataSource {
 
-    interface OnCompleteListener {
-        void onRequestSusscee(@NonNull String response);
+    interface OnUserCompleteListener {
+        void onRequestSusscee(@NonNull User user);
         void onRequestError(Exception e);
     }
 
     interface UserRemoteDataSource {
         void getUser(@NonNull String username, @NonNull String password,
-                     @NonNull OnCompleteListener callback);
+                     @NonNull OnUserCompleteListener callback);
         void saveUser(@NonNull User user);
         void updateUser(@NonNull String oldUsername, @NonNull User user);
     }

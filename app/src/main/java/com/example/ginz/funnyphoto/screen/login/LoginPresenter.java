@@ -22,22 +22,17 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void login(String username, String password) {
         mLoginView.onShowProgress();
-        mUserRepository.getUser(username, password, new UsersDataSource.OnCompleteListener() {
+        mUserRepository.getUser(username, password, new UsersDataSource.OnUserCompleteListener() {
             @Override
-            public void onRequestSusscee(@NonNull String response) {
-                User user = null;
-                try {
-                    user = User.parseUser(response);
-                    if(user != null){
-                        mLoginView.navigateToMain(user);
-                    } else {
-                        mLoginView.onHideProgress();
-                        mLoginView.onShowError(Constants.Authentication.ERROR_USER);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            public void onRequestSusscee(@NonNull User user) {
+                if(user != null){
+                    mLoginView.navigateToMain(user);
+                } else {
+                    mLoginView.onHideProgress();
+                    mLoginView.onShowError(Constants.Authentication.ERROR_USER);
                 }
             }
+
             @Override
             public void onRequestError(Exception e) {
                 mLoginView.onShowError(Constants.Authentication.ERROR_SERVER);

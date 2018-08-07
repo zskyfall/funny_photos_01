@@ -1,10 +1,10 @@
 package com.example.ginz.funnyphoto.screen.main;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -12,47 +12,67 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.ginz.funnyphoto.widget.BottomNavigationBehavior;
-import com.example.ginz.funnyphoto.widget.IBottomMenuBehaviorListener;
 import com.example.ginz.funnyphoto.R;
-import com.example.ginz.funnyphoto.screen.profile.ProfileFragment;
+import com.example.ginz.funnyphoto.data.model.User;
+import com.example.ginz.funnyphoto.screen.home.HomeFragment;
+import com.example.ginz.funnyphoto.screen.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity
-        implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener,
-        IBottomMenuBehaviorListener {
+        implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
-    private static final String FONT = "fonts/fortee.ttf";
+    public static final String ARGUMENT_USER = "argument_user";
     public BottomNavigationView mBottomMenu;
-    private Typeface mTypeface;
     private TextView mTextTitleToolbar;
-    private boolean mIsBottomMenuVisible = true;
-    private Animation mAnimSlideUp;
-    private Animation mAnimSlideDown;
+    private User mUser;
+    private HomeFragment mHomeFragment;
+    private static final String FONT = "fonts/fortee.ttf";
     private ImageView mImageNewPost;
 
-    Fragment profileFragment = new ProfileFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ImageView imageView = findViewById(R.id.image_logo);
-
-        imageView.setOnClickListener(this);
-
         initView();
         setListener();
         setFont();
+        mUser = getUser();
+        mHomeFragment = newHomeFragment(mUser);
+        loadFragment(mHomeFragment);
+    }
 
-        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) mBottomMenu.getLayoutParams();
-        layoutParams.setBehavior(new BottomNavigationBehavior(this));
-        mAnimSlideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up_bottom_menu);
-        mAnimSlideDown = AnimationUtils.loadAnimation(this, R.anim.slide_down_bottom_menu);
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.menu_home:
+                loadFragment(mHomeFragment);
+                mTextTitleToolbar.setText(getString(R.string.title_home));
+                break;
+            case R.id.menu_hot:
+                mTextTitleToolbar.setText(getString(R.string.title_hot));
+                break;
+            case R.id.menu_profile:
+                mTextTitleToolbar.setText(R.string.title_profile);
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id){
+            case R.id.image_new_post:
+                break;
+            case R.id.image_logo:
+                Dialog dialog = new Dialog(MainActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog);
+                dialog.show();
+                break;
+        }
     }
 
     private void initView(){
@@ -67,25 +87,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setFont(){
-        mTypeface = Typeface.createFromAsset(getAssets(), FONT);
+        Typeface mTypeface = Typeface.createFromAsset(getAssets(), FONT);
         mTextTitleToolbar.setTypeface(mTypeface);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        switch (id){
-            case R.id.menu_home:
-                break;
-            case R.id.menu_hot:
-                break;
-            case R.id.menu_profile:
-                // mViewPager.setCurrentItem(2);
-                mTextTitleToolbar.setText(getString(R.string.title_profile));
-                loadFragment(profileFragment);
-                break;
-        }
-        return true;
+        mBottomMenu.setOnNavigationItemSelectedListener(this);
     }
 
     private void loadFragment(Fragment fragment){
@@ -95,40 +99,17 @@ public class MainActivity extends AppCompatActivity
         transaction.commit();
     }
 
-    @Override
-    public void onScrollUp() {  //hiển thị bottom menu
-        if(!mIsBottomMenuVisible) {
-            mBottomMenu.clearAnimation();
-            mBottomMenu.startAnimation(mAnimSlideUp);
-            mBottomMenu.setEnabled(true);
-        }
-        mIsBottomMenuVisible = true;
+    private User getUser() {
+        Intent intent = getIntent();
+        User user = intent.getParcelableExtra(LoginActivity.EXTRA_USER);
+        return user;
     }
 
-    @Override
-    public void onScrollDown() {    //Ẩn bottom menu
-        if(mIsBottomMenuVisible) {
-            mBottomMenu.clearAnimation();
-            mBottomMenu.startAnimation(mAnimSlideDown);
-            mBottomMenu.setEnabled(false);
-        }
-        mIsBottomMenuVisible = false;
-    }
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        switch (id){
-            case R.id.image_new_post:
-//                Intent intent = new Intent(MainActivity.this, ChoosePhotoAvtivity.class);
-//                startActivity(intent);
-                break;
-            case R.id.image_logo:
-                Dialog dialog = new Dialog(MainActivity.this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.dialog);
-                dialog.show();
-                break;
-        }
+    private HomeFragment newHomeFragment(User user) {
+        HomeFragment fragment = new HomeFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(ARGUMENT_USER, user);
+        fragment.setArguments(args);
+        return fragment;
     }
 }

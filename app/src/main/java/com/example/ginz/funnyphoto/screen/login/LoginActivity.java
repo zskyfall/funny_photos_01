@@ -46,25 +46,6 @@ public class LoginActivity extends AppCompatActivity
         super.onResume();
     }
 
-    private void initView(){
-        mTextLogo = findViewById(R.id.text_logo);
-        mEditUsername = findViewById(R.id.edit_username_login);
-        mEditPassword = findViewById(R.id.edit_password_login);
-        mButtonLogin = findViewById(R.id.button_login);
-        mButtonRegister = findViewById(R.id.button_register);
-        mProgress = findViewById(R.id.progress_login);
-    }
-
-    private void setListener(){
-        mButtonLogin.setOnClickListener(this);
-        mButtonRegister.setOnClickListener(this);
-    }
-
-    private void setFontLogo(){
-        Typeface mTypefaceLogo = Typeface.createFromAsset(getAssets(), FONT_PATH);
-        mTextLogo.setTypeface(mTypefaceLogo);
-    }
-
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -110,6 +91,26 @@ public class LoginActivity extends AppCompatActivity
         startActivity(getMainIntent(this, user));
         finish();
     }
+
+    private void initView(){
+        mTextLogo = findViewById(R.id.text_logo);
+        mEditUsername = findViewById(R.id.edit_username_login);
+        mEditPassword = findViewById(R.id.edit_password_login);
+        mButtonLogin = findViewById(R.id.button_login);
+        mButtonRegister = findViewById(R.id.button_register);
+        mProgress = findViewById(R.id.progress_login);
+    }
+
+    private void setListener(){
+        mButtonLogin.setOnClickListener(this);
+        mButtonRegister.setOnClickListener(this);
+    }
+
+    private void setFontLogo(){
+        Typeface mTypefaceLogo = Typeface.createFromAsset(getAssets(), FONT_PATH);
+        mTextLogo.setTypeface(mTypefaceLogo);
+    }
+
 
     private Intent getMainIntent(Context context, User user){
         Intent intent = new Intent(context, MainActivity.class);
