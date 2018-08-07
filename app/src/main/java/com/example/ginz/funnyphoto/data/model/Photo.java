@@ -8,19 +8,19 @@ public class Photo {
         this.mPath = mPath;
     }
 
-    public String getmPath() {
+    public String getPath() {
         return mPath;
     }
 
-    public void setmPath(String mPath) {
+    public void setPath(String mPath) {
         this.mPath = mPath;
     }
 
-    public boolean ismChecked() {
+    public boolean isChecked() {
         return mChecked;
     }
 
-    public void setmChecked(boolean mChecked) {
+    public void setChecked(boolean mChecked) {
         this.mChecked = mChecked;
     }
 }

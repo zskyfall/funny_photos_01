@@ -19,7 +19,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public class SelectedPhotoAdapter extends RecyclerView.Adapter<SelectedPhotoAdapter.ViewHolder> {
-
+    private static final int SAMPLE_SIZE = 8;
     private Context mContext;
     private List<String> mSelectedPhoto;
     private IGarelly mIGarelly;
@@ -40,10 +40,8 @@ public class SelectedPhotoAdapter extends RecyclerView.Adapter<SelectedPhotoAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        //holder.mImageSelectedPhoto.setImageBitmap(decodeFile(mSelectedPhoto.get(position)));
-
-        Picasso.with(mContext).load(new File(mSelectedPhoto.get(position))).into(holder.mImageSelectedPhoto);
-        Log.d("kiemtra", mSelectedPhoto.get(position));
+        Picasso.with(mContext).load(new File(mSelectedPhoto.get(position)))
+                .into(holder.mImageSelectedPhoto);
         holder.mImageDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,10 +52,7 @@ public class SelectedPhotoAdapter extends RecyclerView.Adapter<SelectedPhotoAdap
 
     @Override
     public int getItemCount() {
-        if(mSelectedPhoto != null){
-            return mSelectedPhoto.size();
-        }
-        return 0;
+        return mSelectedPhoto != null ? mSelectedPhoto.size() : 0;
     }
 
     private Bitmap decodeFile(String path){
@@ -65,7 +60,7 @@ public class SelectedPhotoAdapter extends RecyclerView.Adapter<SelectedPhotoAdap
         try {
             FileInputStream fis = new FileInputStream(file);
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 8;
+            options.inSampleSize = SAMPLE_SIZE;
             return BitmapFactory.decodeStream(fis, null, options);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

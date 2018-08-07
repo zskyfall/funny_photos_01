@@ -17,7 +17,6 @@ import com.example.ginz.funnyphoto.data.model.Post;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-
     private Context mContext;
     private List<Post> mPosts;
 
@@ -37,8 +36,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Post post = mPosts.get(position);
-
-
         holder.mImageLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,13 +47,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     public void onAnimationStart(Animation animation) {
 
                     }
-
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         Animation zoomOut = AnimationUtils.loadAnimation(mContext, R.anim.zoom_out_button_like);
                         holder.mImageLike.startAnimation(zoomOut);
                     }
-
                     @Override
                     public void onAnimationRepeat(Animation animation) {
 
@@ -64,17 +59,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 });
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        if(mPosts != null){
-            return mPosts.size();
-        }
-        return 0;
+        return mPosts != null ? mPosts.size() : 0;
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView mImageAvatar;
@@ -94,8 +84,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mImageComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Intent intent = new Intent(mContext, PostDetailAcitivy.class);
-                    //mContext.startActivity(intent);
+
                 }
             });
         }
@@ -109,8 +98,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mTextUserName = itemView.findViewById(R.id.text_username_post);
             mTextPostTime = itemView.findViewById(R.id.text_time_post);
             mTextContent = itemView.findViewById(R.id.text_content_post);
-//            mTextLikes = itemView.findViewById(R.id.text_likes_post);
-//            mTextComments = itemView.findViewById(R.id.text_comments_post);
         }
     }
 }

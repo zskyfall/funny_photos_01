@@ -10,11 +10,13 @@
     <string name="home">Home</string>
     <string name="hot">Hot</string>
     <string name="login">Login</string>
-    <string name="ok">OK</string>
+    <string name="accept">OK</string>
     <string name="or">Hoặc</string>
     <string name="register">Đăng ký</string>
     <string name="username">Tên đăng nhập</string>
     <string name="password">Mật khẩu</string>
+    <string name="total_like">Lượt Thích</string>
+    <string name="total_posts">Bài Đăng</string>
     <string name="post">Bài viết</string>
     <string name="profile">Profile</string>
     <string name="update_profile_title">Chỉnh sửa trang cá nhân</string>
@@ -47,8 +49,4 @@
     <string name="title_password">Mật khẩu</string>
     <string name="title_post">Bài viết</string>
     <string name="title_profile">Profile</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    >>>>>>> create UI, Handler event login function
 </resources>

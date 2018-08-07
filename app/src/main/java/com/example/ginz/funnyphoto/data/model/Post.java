@@ -21,51 +21,51 @@ public class Post {
         this.mLikes = likes;
     }
 
-    public long getmId() {
+    public long getId() {
         return mId;
     }
 
-    public void setmId(long id) {
+    public void setId(long id) {
         this.mId = mId;
     }
 
-    public User getmUserPosted() {
+    public User getUserPosted() {
         return mUserPosted;
     }
 
-    public void setmUserPosted(User userPosted) {
+    public void setUserPosted(User userPosted) {
         this.mUserPosted = mUserPosted;
     }
 
-    public String getmTitle() {
+    public String getTitle() {
         return mTitle;
     }
 
-    public void setmTitle(String title) {
+    public void setTitle(String title) {
         this.mTitle = mTitle;
     }
 
-    public Long getmPostTime() {
+    public Long getPostTime() {
         return mPostTime;
     }
 
-    public void setmPostTime(Long postTime) {
+    public void setPostTime(Long postTime) {
         this.mPostTime = mPostTime;
     }
 
-    public String getmImagePath() {
+    public String getImagePath() {
         return mImagePath;
     }
 
-    public void setmImagePath(String imagePath) {
+    public void setImagePath(String imagePath) {
         this.mImagePath = mImagePath;
     }
 
-    public int getmLikes() {
+    public int getLikes() {
         return mLikes;
     }
 
-    public void setmLikes(int likes) {
+    public void setLikes(int likes) {
         this.mLikes = mLikes;
     }
 }

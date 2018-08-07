@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/image_selected_photo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
         android:src="@drawable/java"
         android:scaleType="centerCrop"
         />

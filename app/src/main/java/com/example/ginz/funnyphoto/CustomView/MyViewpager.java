@@ -6,8 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 public class MyViewpager extends ViewPager {
-    private boolean enabled;
-
+    private boolean mEnabled;
 
     public MyViewpager(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -15,7 +14,7 @@ public class MyViewpager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (this.enabled) {
+        if (this.mEnabled) {
             return super.onTouchEvent(event);
         }
         return false;
@@ -23,7 +22,7 @@ public class MyViewpager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        if (this.enabled) {
+        if (this.mEnabled) {
             return super.onInterceptTouchEvent(event);
         }
         return false;
