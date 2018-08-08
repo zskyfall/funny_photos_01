@@ -49,4 +49,5 @@
     <string name="title_password">Mật khẩu</string>
     <string name="title_post">Bài viết</string>
     <string name="title_profile">Profile</string>
+    <string name="msg_last_data">Hết bài viết</string>
 </resources>

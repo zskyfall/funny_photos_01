@@ -13,7 +13,6 @@ public interface RegisterContract {
         void onRegisterError(String message);
 
         String getString(int resourceID);
-
     }
 
     interface Presenter extends BasePresenter {

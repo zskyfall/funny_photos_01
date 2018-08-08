@@ -48,8 +48,8 @@ public class RegisterPresenter implements RegisterContract.Presenter,
     }
 
     @Override
-    public void onRegisterUserError(String message) {
-        mRegisterView.onRegisterError(message);
+    public void onRegisterUserError(Exception message) {
+
     }
 
     @Override

@@ -24,7 +24,7 @@ public class GetDataAsyncTask extends AsyncTask<String, Void, String>{
     private Map<String, String> mParameters;
     private int mConnectTimeout;
     private int mReadTimeout;
-    private UsersDataSource.OnCompleteListener mOnCompleteListener;
+    private OnCompleteListener mOnCompleteListener;
 
     private GetDataAsyncTask(Builder builder){
         mApiUrl = builder.mApiUrl;
@@ -45,7 +45,7 @@ public class GetDataAsyncTask extends AsyncTask<String, Void, String>{
             URL url = new URL(mApiUrl);
             mConn = (HttpURLConnection) url.openConnection();
             setupParameter(mParameters);
-            return resqonse();
+            return response();
         } catch (IOException e) {
             mOnCompleteListener.onRequestError(e);
             e.printStackTrace();
@@ -59,8 +59,7 @@ public class GetDataAsyncTask extends AsyncTask<String, Void, String>{
         mOnCompleteListener.onRequestSusscee(s);
     }
 
-    private String resqonse() throws IOException {
-
+    private String response() throws IOException {
         StringBuilder result = new StringBuilder();
         InputStream is = mConn.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -103,7 +102,7 @@ public class GetDataAsyncTask extends AsyncTask<String, Void, String>{
         private Map<String, String> mParameters;
         private int mConnectTimeout;
         private int mReadTimeout;
-        private UsersDataSource.OnCompleteListener mOnCompleteListener;
+        private OnCompleteListener mOnCompleteListener;
 
         public Builder() {
             mParameters = new HashMap<>();
@@ -135,7 +134,7 @@ public class GetDataAsyncTask extends AsyncTask<String, Void, String>{
             return new GetDataAsyncTask(this);
         }
 
-        public Builder addOnCompleteListener(UsersDataSource.OnCompleteListener onCompleteListener){
+        public Builder addOnCompleteListener(OnCompleteListener onCompleteListener){
             mOnCompleteListener = onCompleteListener;
             return this;
         }

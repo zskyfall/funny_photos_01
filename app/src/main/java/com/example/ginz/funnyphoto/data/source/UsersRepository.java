@@ -1,6 +1,5 @@
 package com.example.ginz.funnyphoto.data.source;
 
-
 import android.support.annotation.NonNull;
 
 import com.example.ginz.funnyphoto.data.model.User;
@@ -24,7 +23,7 @@ public class UsersRepository implements UsersDataSource.UserRemoteDataSource {
 
     @Override
     public void getUser(@NonNull String username, @NonNull String password,
-                        @NonNull UsersDataSource.OnCompleteListener callback) {
+                        @NonNull UsersDataSource.OnUserCompleteListener callback) {
         mUserRemoteDataSource.getUser(username, password, callback);
 
     }
