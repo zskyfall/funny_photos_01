@@ -22,6 +22,8 @@ public interface ProfileContract {
 
         void onLoadPostsError(Exception exception);
 
+        void onEditProfile();
+
         String getString(int resourcID);
     }
 
@@ -29,5 +31,7 @@ public interface ProfileContract {
         void loadProfile();
 
         void getPosts(String username);
+
+        void editProfile();
     }
 }

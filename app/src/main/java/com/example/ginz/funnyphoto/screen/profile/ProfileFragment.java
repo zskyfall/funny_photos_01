@@ -1,6 +1,7 @@
 package com.example.ginz.funnyphoto.screen.profile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +35,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileFragment extends Fragment implements ProfileContract.View{
+public class ProfileFragment extends Fragment implements ProfileContract.View, View.OnClickListener{
     private static final int SPAN_COUNT = 3;
     private static final String LOGINED_USER = "LOGINED_USER";
     private static final String KEY_USERNAME = "USERNAME";
@@ -41,6 +43,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View{
     private RecyclerView mRecyclerPost;
     private ImageView mImageAvatar;
     private TextView mTextFullName;
+    private Button mButtonEditProfile;
     private TextView mTextEmail;
     private List<Post> mPosts;
     private ProfileContract.Presenter mPresenter;
@@ -70,7 +73,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View{
         String username = mSharedPreferences.getString(KEY_USERNAME,"");
 
         mPresenter.loadProfile();
-        mPresenter.getPosts(username);
+        mPresenter.getPosts("admin");
+        mButtonEditProfile.setOnClickListener(this);
     }
 
     private void initView(){
@@ -78,6 +82,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View{
         mTextEmail= mActivity.findViewById(R.id.text_email_profile);
         mTextFullName = mActivity.findViewById(R.id.text_fullname_profile);
         mImageAvatar = mActivity.findViewById(R.id.image_avatar);
+        mButtonEditProfile = mActivity.findViewById(R.id.button_edit_profile);
     }
 
     private void setupRecycler(){
@@ -113,11 +118,26 @@ public class ProfileFragment extends Fragment implements ProfileContract.View{
 
     @Override
     public void onLoadPostsError(Exception exception) {
+        Toast.makeText(mActivity, exception.toString(), Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onEditProfile() {
+        Intent intent = new Intent(mActivity, UpdateProfileActivity.class);
+        startActivity(intent);
     }
 
     @Override
     public void setPresenter(ProfileContract.Presenter presenter) {
         mPresenter = Preconditions.checkNotNull(presenter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_edit_profile:
+                mPresenter.editProfile();
+                break;
+        }
     }
 }

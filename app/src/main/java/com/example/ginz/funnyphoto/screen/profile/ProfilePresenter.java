@@ -62,4 +62,9 @@ public class ProfilePresenter implements ProfileContract.Presenter, UserDataSour
     public void getPosts(String username) {
         mPostsRepository.getPostsByUsername(username, this);
     }
+
+    @Override
+    public void editProfile() {
+        mProfileView.onEditProfile();
+    }
 }

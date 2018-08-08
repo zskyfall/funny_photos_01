@@ -3,8 +3,7 @@
     package="com.example.ginz.funnyphoto">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,9 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".screen.profile.UpdateProfileActivity"/>
-        <activity android:name=".screen.login.LoginActivity"/>
+        <activity android:name=".screen.profile.UpdateProfileActivity" />
+        <activity android:name=".screen.login.LoginActivity" />
         <activity android:name=".screen.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".screen.registration.RegistrationActivity" />
+        <activity android:name=".screen.post.PostDetailActivity"></activity>
     </application>
 
 </manifest>
