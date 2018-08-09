@@ -1,13 +1,9 @@
 package com.example.ginz.funnyphoto.data.source.source;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.example.ginz.funnyphoto.data.model.Post;
 import com.example.ginz.funnyphoto.data.source.source.remote.PostsRemoteDataSource;
-
-import java.util.ArrayList;
 
 public class PostsRepository implements PostDataSource.RemoteDataSource {
     private static PostsRepository sInstance;
@@ -25,7 +21,7 @@ public class PostsRepository implements PostDataSource.RemoteDataSource {
     }
 
     @Override
-    public void getPostsByUsername(String username, PostDataSource.GetPostCallback callback) {
+    public void getPostsByUsername(String username, PostDataSource.GetPostsCallback callback) {
         mRemoteDataSource.getPostsByUsername(username, callback);
     }
 

@@ -118,7 +118,7 @@ public class User implements Parcelable{
             String email = jsonUser.optString(User.Key.EMAIL, null);
             String fullName = jsonUser.optString(User.Key.FULL_NAME, null);
             String avatar = jsonUser.optString(User.Key.AVATAR, null);
-            User user = new User(username, password, fullName, email, avatar);
+            User user = new User(username, password, fullName, avatar, email);
             return user;
         } else {
             return null;

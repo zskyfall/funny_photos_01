@@ -12,6 +12,9 @@ public final class Constants {
         public static final String ACTION_UPDATE_PROFILE = BASE_URL_API + "users/update";
         public static final String ACTION_LOGIN = RESOURCE_USER + "login/";
         public static final String ACTION_REGISTER = RESOURCE_USER + "register/";
+        public static final String ACTION_LIKE = BASE_URL_API + "photos/love/";
+        public static final String ACTION_POST = BASE_URL_API + "photos/add/";
+        public static final String LIKES = BASE_URL_API + "likes/";
     }
 
     public class Post {

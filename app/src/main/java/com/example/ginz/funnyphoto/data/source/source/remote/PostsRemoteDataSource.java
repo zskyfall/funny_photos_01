@@ -29,7 +29,7 @@ public class PostsRemoteDataSource implements PostDataSource.RemoteDataSource {
 
     @Override
     public void getPostsByUsername(String username,
-                                              final PostDataSource.GetPostCallback callback) {
+                                              final PostDataSource.GetPostsCallback callback) {
 
         GetDataAsyncTask asyncTask = new GetDataAsyncTask.Builder()
                 .setApiUrl(Constants.Server.RESOURCE_PHOTO_BY_OWNER + username)

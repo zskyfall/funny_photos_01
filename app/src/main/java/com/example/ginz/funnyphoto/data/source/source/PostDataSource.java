@@ -5,12 +5,16 @@ import android.support.annotation.NonNull;
 import com.example.ginz.funnyphoto.data.model.Post;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface PostDataSource {
 
-    interface GetPostCallback {
+    interface GetPostsCallback {
         void onPostLoaded(ArrayList<Post> list);
+        void onDataNotAvailable(Exception exception);
+    }
+
+    interface GetPostCallback {
+        void onPostLoaded();
         void onDataNotAvailable(Exception exception);
     }
 
@@ -25,7 +29,7 @@ public interface PostDataSource {
     }
 
     interface RemoteDataSource {
-        void getPostsByUsername(String username, GetPostCallback callback);
+        void getPostsByUsername(String username, GetPostsCallback callback);
         void addPost(@NonNull Post post, AddPostCallback callback);
     }
 

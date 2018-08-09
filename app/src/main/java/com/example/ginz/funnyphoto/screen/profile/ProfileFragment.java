@@ -26,16 +26,20 @@ import com.example.ginz.funnyphoto.data.source.source.UsersRepository;
 import com.example.ginz.funnyphoto.data.source.source.local.UserLocalDataSource;
 import com.example.ginz.funnyphoto.data.source.source.remote.PostsRemoteDataSource;
 import com.example.ginz.funnyphoto.data.source.source.remote.UsersRemoteDataSource;
+import com.example.ginz.funnyphoto.screen.post.PostDetailActivity;
 import com.example.ginz.funnyphoto.screen.profile.adapter.PhotoAdapter;
 import com.example.ginz.funnyphoto.screen.profile.adapter.PostAdapter;
 import com.example.ginz.funnyphoto.data.model.Post;
 import com.example.ginz.funnyphoto.utils.Preconditions;
+import com.example.ginz.funnyphoto.utils.UrlImageHandler;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileFragment extends Fragment implements ProfileContract.View, View.OnClickListener{
+public class ProfileFragment extends Fragment implements ProfileContract.View, View.OnClickListener,
+        ViewPostDetail{
+
     private static final int SPAN_COUNT = 3;
     private static final String LOGINED_USER = "LOGINED_USER";
     private static final String KEY_USERNAME = "USERNAME";
@@ -77,6 +81,12 @@ public class ProfileFragment extends Fragment implements ProfileContract.View, V
         mButtonEditProfile.setOnClickListener(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.loadProfile();
+    }
+
     private void initView(){
         mRecyclerPost = mActivity.findViewById(R.id.recycler_post_profile);
         mTextEmail= mActivity.findViewById(R.id.text_email_profile);
@@ -88,7 +98,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View, V
     private void setupRecycler(){
         mPosts = new ArrayList<>();
 
-        mPostAdapter = new PhotoAdapter(getActivity(), mPosts);
+        mPostAdapter = new PhotoAdapter(getActivity(), mPosts, this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), SPAN_COUNT);
         mRecyclerPost.setHasFixedSize(true);
         mRecyclerPost.setLayoutManager(mLayoutManager);
@@ -101,7 +111,8 @@ public class ProfileFragment extends Fragment implements ProfileContract.View, V
         mTextFullName.setText(user.getFullName());
         mTextEmail.setText(user.getEmail());
         if(!user.getAvatar().equals("")) {
-             Picasso.with(getContext()).load(user.getAvatar()).into(mImageAvatar);
+            String avatar = UrlImageHandler.getAbsoluteImageUrl(user.getAvatar());
+             Picasso.with(getContext()).load(avatar).into(mImageAvatar);
         }
     }
 
@@ -139,5 +150,24 @@ public class ProfileFragment extends Fragment implements ProfileContract.View, V
                 mPresenter.editProfile();
                 break;
         }
+    }
+
+    @Override
+    public void viewPost(Post post) {
+        User user = post.getUserPosted();
+        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(User.Key.FULL_NAME, user.getFullName());
+        bundle.putString(User.Key.AVATAR, user.getAvatar());
+        bundle.putString(User.Key.USERNAME, user.getUsername());
+
+        bundle.putString(Post.Key.POST_TIME, post.getPostTime());
+        bundle.putString(Post.Key.TITLE, post.getTitle());
+        bundle.putString(Post.Key.IMAGE_URL, post.getImagePath());
+        bundle.putInt(Post.Key.LOVE, post.getLikes());
+
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

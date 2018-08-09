@@ -1,6 +1,7 @@
 package com.example.ginz.funnyphoto.screen.profile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -21,6 +22,8 @@ import com.example.ginz.funnyphoto.data.source.source.local.UserLocalDataSource;
 import com.example.ginz.funnyphoto.data.source.source.remote.UsersRemoteDataSource;
 import com.example.ginz.funnyphoto.screen.main.MainActivity;
 import com.example.ginz.funnyphoto.utils.ImageHandler;
+import com.facebook.share.Share;
+import com.squareup.picasso.Picasso;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -28,8 +31,14 @@ import java.io.InputStream;
 public class UpdateProfileActivity extends AppCompatActivity implements
         UpdateProfileContract.View, View.OnClickListener {
 
+    private static final String LOGINED_USER = "LOGINED_USER";
+    private static final String KEY_USERNAME = "USERNAME";
+    private static final String KEY_EMAIL = "EMAIL";
+    private static final String KEY_PASSWORD = "PASSWORD";
+    private static final String KEY_FULLNAME = "FULLNAME";
+    private static final String KEY_AVATAR = "AVATAR";
+
     private static final int REQUEST_PICK_IMAGE = 69;
-    private static final String TEST_USERNAME = "admin";
     private ImageView mImageClose;
     private ImageView mImageDone;
     private ImageView mImageAvatar;
@@ -41,15 +50,18 @@ public class UpdateProfileActivity extends AppCompatActivity implements
     private Bitmap mBitmap;
     private UpdateProfileContract.Presenter mPresenter;
     private ProgressBar mProgressUpdate;
+    private SharedPreferences mSharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
+        mSharedPreference = getSharedPreferences(LOGINED_USER, MODE_PRIVATE);
         mPresenter = new UpdateProfilePresenter(UsersRepository.getInstance(UsersRemoteDataSource
                 .getInstance(), UserLocalDataSource.getInstance(this)), this);
         initView();
+        getUserData();
         setListener();
     }
 
@@ -68,6 +80,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements
         mEditFullName = findViewById(R.id.edit_fullname_update);
         mEditPassword = findViewById(R.id.edit_password_update);
         mProgressUpdate = findViewById(R.id.progress_update_profile);
+
+
     }
 
     private void goMainScreen() {
@@ -75,12 +89,29 @@ public class UpdateProfileActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    private void getUserData() {
+        String fullName = mSharedPreference.getString(KEY_FULLNAME, "");
+        String email = mSharedPreference.getString(KEY_EMAIL, "");
+        String password = mSharedPreference.getString(KEY_PASSWORD, "");
+        String avatar = mSharedPreference.getString(KEY_AVATAR, "");
+        mEditFullName.setText(fullName);
+        mEditPassword.setText(password);
+        mEditEmail.setText(email);
+
+        if(!avatar.equals("")) {
+            Picasso.with(this).load(avatar).into(mImageAvatar);
+        }
+    }
+
     private void updateProfile() {
+
+        String username = mSharedPreference.getString(KEY_USERNAME, "");
+
         String email = mEditEmail.getText().toString();
         String fullName = mEditFullName.getText().toString();
         String password = mEditPassword.getText().toString();
 
-        User user = new User(TEST_USERNAME, password, fullName, "", email);
+        User user = new User(username, password, fullName, "", email);
 
         mPresenter.updateProfile(user, ImageHandler.imageToString(mBitmap));
     }

@@ -10,10 +10,9 @@ import com.example.ginz.funnyphoto.data.source.source.UserDataSource;
 import com.example.ginz.funnyphoto.data.source.source.UsersRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProfilePresenter implements ProfileContract.Presenter, UserDataSource.GetUserCallback,
-        PostDataSource.GetPostCallback{
+        PostDataSource.GetPostsCallback {
 
     @NonNull
     private UsersRepository mUserRepository;

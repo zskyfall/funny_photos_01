@@ -1,6 +1,7 @@
 package com.example.ginz.funnyphoto.data.source;
 
 import android.support.annotation.NonNull;
+
 import com.example.ginz.funnyphoto.data.model.Post;
 import com.example.ginz.funnyphoto.data.source.remote.PostsRemoteDataSource;
 
@@ -21,13 +22,14 @@ public class PostsRepository implements PostsDataSource.PostRemoteDataSource {
     }
 
     @Override
-    public void getPost(@NonNull int page, @NonNull PostsDataSource.OnPostCompleteListener callback) {
+    public void getPost(@NonNull int page,
+                        @NonNull PostsDataSource.OnPostCompleteListener callback) {
         mRemoteDataSource.getPost(page, callback);
     }
 
     @Override
-    public void savePost(@NonNull Post post) {
-        mRemoteDataSource.savePost(post);
+    public void savePost(@NonNull Post post, @NonNull PostsDataSource.OnPostCompleteListener callback) {
+        mRemoteDataSource.savePost(post, callback);
     }
 
     @Override

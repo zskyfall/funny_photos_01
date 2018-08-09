@@ -2,6 +2,7 @@ package com.example.ginz.funnyphoto.screen.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,14 +13,22 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.ginz.funnyphoto.R;
 import com.example.ginz.funnyphoto.configuration.Constants;
 import com.example.ginz.funnyphoto.data.model.User;
 import com.example.ginz.funnyphoto.screen.main.MainActivity;
 import com.example.ginz.funnyphoto.screen.registration.RegistrationActivity;
 
-public abstract class LoginActivity extends AppCompatActivity
+public class LoginActivity extends AppCompatActivity
         implements View.OnClickListener, LoginContract.View{
+
+    private static final String LOGINED_USER = "LOGINED_USER";
+    private static final String KEY_USERNAME = "USERNAME";
+    private static final String KEY_EMAIL = "EMAIL";
+    private static final String KEY_PASSWORD = "PASSWORD";
+    private static final String KEY_FULLNAME = "FULLNAME";
+    private static final String KEY_AVATAR = "AVATAR";
 
     public static final String EXTRA_USER = "USER";
     private static final String FONT_PATH = "fonts/fortee.ttf";
@@ -30,6 +39,8 @@ public abstract class LoginActivity extends AppCompatActivity
     private Button mButtonLogin;
     private Button mButtonRegister;
     private ProgressBar mProgress;
+
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,6 +99,16 @@ public abstract class LoginActivity extends AppCompatActivity
 
     @Override
     public void navigateToMain(User user) {
+        mSharedPreferences = getSharedPreferences(LOGINED_USER, MODE_PRIVATE);
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+
+        editor.putString(KEY_USERNAME, user.getUsername());
+        editor.putString(KEY_EMAIL, user.getEmail());
+        editor.putString(KEY_PASSWORD, user.getPassword());
+        editor.putString(KEY_AVATAR, user.getAvatar());
+
+        editor.commit();
+
         startActivity(getMainIntent(this, user));
         finish();
     }
@@ -110,7 +131,6 @@ public abstract class LoginActivity extends AppCompatActivity
         Typeface mTypefaceLogo = Typeface.createFromAsset(getAssets(), FONT_PATH);
         mTextLogo.setTypeface(mTypefaceLogo);
     }
-
 
     private Intent getMainIntent(Context context, User user){
         Intent intent = new Intent(context, MainActivity.class);

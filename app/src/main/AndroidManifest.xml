@@ -12,9 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider android:authorities="com.facebook.app.FacebookContentProvider963694093943725"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
         <activity android:name=".screen.profile.UpdateProfileActivity" />
-        <activity android:name=".screen.login.LoginActivity" />
-        <activity android:name=".screen.main.MainActivity">
+        <activity android:name=".screen.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,6 +28,8 @@
         </activity>
         <activity android:name=".screen.registration.RegistrationActivity" />
         <activity android:name=".screen.post.PostDetailActivity"></activity>
+        <activity android:name=".screen.main.MainActivity"/>
+        <activity android:name=".screen.post.PostPhotoActivity"/>
     </application>
 
 </manifest>

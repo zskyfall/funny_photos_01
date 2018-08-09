@@ -17,7 +17,7 @@ public class Post {
     private String mImagePath;
     private int mLikes;
 
-    public Post(){}
+    public Post(User mUser, String title, String s){}
 
     public Post(String id, String title, String postTime, String imagePath, int likes) {
         this.mId = id;
@@ -86,11 +86,17 @@ public class Post {
     }
 
     public static class Key {
+        public static final String POST_TIME = "rawDate";
         public static final String OWNER = "owner";
         public static final String LOVE = "love";
         public static final String ID = "_id";
         public static final String TITLE = "title";
         public static final String IMAGE_URL = "url";
+        public static final String POST_ID = "postId";
+        public static final String RAW_PHOTO = "rawPhoto";
+        public static final String OWNER_NAME = "ownerName";
+        public static final String OWNER_AVATAR = "ownerAvatar";
+        public static final String OWNER_USERNAME = "ownerUsername";
     }
 
     public static List<Post> parsePosts(String jsonData) throws JSONException {

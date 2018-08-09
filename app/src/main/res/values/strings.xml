@@ -52,4 +52,10 @@
     <string name="msg_last_data">Hết bài viết</string>
     <string name="comment">Bình Luận</string>
     <string name="post_comment">Đăng</string>
+    <string name="load_data_error">Tải dữ liệu lỗi, thử lại?!</string>
+    <string name="facebook_app_id">292342098195244</string>
+    <string name="fb_login_protocol_scheme">fb292342098195244</string>
+    <string name="action_post">Post</string>
+    <string name="action_add_title">Thêm nội dung</string>
+    <string name="error_any">Có lỗi xảy ra</string>
 </resources>

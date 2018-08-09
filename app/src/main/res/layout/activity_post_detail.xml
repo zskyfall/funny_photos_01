@@ -43,8 +43,8 @@
 
             <ImageView
                 android:id="@+id/image_avatar_post_detail"
-                android:layout_width="@dimen/dp_40"
-                android:layout_height="@dimen/dp_40"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
                 android:layout_margin="@dimen/dp_10"
                 android:src="@drawable/logo"
                 />
@@ -53,12 +53,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
                 android:layout_toRightOf="@+id/image_avatar_post_detail"
                 android:orientation="vertical"
                 >
 
                 <TextView
-                    android:id="@+id/text_username_post_detail"
+                    android:id="@+id/text_fullname_post_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
@@ -129,7 +130,7 @@
                 android:src="@drawable/favorite_border_black"
                 />
 
-            <ImageView
+            <com.facebook.share.widget.ShareButton
                 android:id="@+id/image_share_post_detail"
                 android:layout_width="@dimen/dp_24"
                 android:layout_height="@dimen/dp_24"
